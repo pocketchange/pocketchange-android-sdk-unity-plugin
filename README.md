@@ -53,18 +53,22 @@ PocketChangeAndroid.DisplayTokenCounter(0, 0);
 
 To provide custom left and top margins for the counter, alter the first and second parameters, respectively, in the PocketChangeAndroid.DisplayTokenCounter method invocation.
 
-When a user takes a turn, call:
+Before starting a turn, call:
 
 ```C#
-PocketChangeAndroid.TakeTurn();
+PocketChangeAndroid.TakeTurn()
 ```
 
-Your account manager can set the number of tokens per turn on the server.
+The `TakeTurn` method will return true if the user's account was successfully debited for the number of tokens required to play, in which case you should begin the turn. If the method returns false, do not perform any action; the plugin will automatically render appropriate UI components informing the user that more tokens are required and offering the option to purchase tokens. Your account manager can set the number of tokens per turn on the server.
 
-The plugin also provides a way to check if the player can continue playing. The following method will check if the user has enough tokens for a turn OR if the game has been unlocked.
+As users may add funds to their accounts at any time, and I/O callbacks can be difficult to manage due to Android's Activity lifecycle, we recommend calling `TakeTurn` in response to a button click; for example:
 
 ```C#
-PocketChangeAndroid.CanPlay();
+if (GUI.Button(new Rect(xPos, yPos, buttonWidth, buttonHeight), "Start Game")
+    && PocketChangeAndroid.TakeTurn()) {
+    // begin the game
+    Application.LoadLevel("Game");
+}
 ```
 
 ## <a name="testing"></a>Testing Instructions
