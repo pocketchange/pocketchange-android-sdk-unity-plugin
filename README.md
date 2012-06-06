@@ -47,6 +47,8 @@ To initialize the plugin and its corresponding visual elements, use one of the p
 - **PocketChangeAndroidPlayerInitializer**: Persists for the lifetime of your game and automatically includes the required visual elements in every scene. To use this prefab, include it in the first scene of your game.    
 - **PocketChangeAndroidSceneInitializer**: Adds the plugin's visual elements to a single game scene. To use this prefab, include it in one or more scenes. At a minimum, you should include the prefab in the first scene of your game (for example, the menu scene) so that players can easily determine their token balances and purchase more tokens.
 
+**Do not use both prefabs**; such mixed usage will slow down your game and may result in unintended behavior.
+
 To configure the plugin, edit the PocketChangeAndroidControl script:
 
 - Change the APP\_ID constant to match the APP\_ID you obtained in step 1.
@@ -77,3 +79,12 @@ To enable test mode, in the PocketChangeAndroidControl script, set the ENABLE\_T
 Note: when the bank comes up there will be a banner indicating that you're in a test environment. **You must reset the ENABLE\_TEST\_MODE constant to false before releasing your app, otherwise transactions will not go through.**
 
 In addition to test mode, the plugin includes a test scene (Plugins/PocketChangeAndroid/testSupport/PocketChangeAndroidPlayerControlTestScene) that allows you to perform various actions to confirm that you have a sane configuration. When using the test scene, be sure to enable test mode, or you will quickly run out of tokens and be unable to continue testing.
+
+## <a name="upgrading"></a>Upgrading
+
+To upgrade from an earlier release of the plugin:
+
+1. Delete all files from the earlier plugin release.
+2. Delete all of the previous plugin entries from your AndroidManifest.xml.
+3. Complete steps 3, 5, and 6.
+
