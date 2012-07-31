@@ -42,43 +42,9 @@ Update your Plugins/Android/AndroidManifest.xml file to declare the components a
 
 ## Step 6: Integrate the plugin with your game
 
-To initialize the plugin and its corresponding visual elements, use one of the prefabs located in Plugins/PocketChangeAndroid/prefabs.
+To initialize the plugin and its corresponding visual elements, add the PocketChangeAndroidPlayerInitializer prefab to the first scene in your game; this object persists for the lifetime of your game and automatically invokes SDK components as needed.
 
-- **PocketChangeAndroidPlayerInitializer**: Persists for the lifetime of your game and automatically includes the required visual elements in every scene. To use this prefab, include it in the first scene of your game.    
-- **PocketChangeAndroidSceneInitializer**: Adds the plugin's visual elements to a single game scene. To use this prefab, include it in one or more scenes. At a minimum, you should include the prefab in the first scene of your game (for example, the menu scene) so that players can easily determine their token balances and purchase more tokens.
-
-**Do not use both prefabs**; such mixed usage will slow down your game and may result in unintended behavior.
-
-To configure the plugin, edit the PocketChangeAndroidControl script:
-
-- Change the APP\_ID constant to match the APP\_ID you obtained in step 1.
-- (Optional) Alter the position of the token counter to match your game's layout by modifying the DisplayTokenCounter method. By default, this method displays the counter at the top left of the screen by calling:
-
-```C#
-PocketChangeAndroid.DisplayTokenCounter(0, 0);
-```
-
-To provide custom left and top margins for the counter, alter the first and second parameters, respectively, in the PocketChangeAndroid.DisplayTokenCounter method invocation.
-
-When the user triggers a UI event to start the game, call:
-
-```C#
-if (PocketChangeAndroid.TakeTurn()) {
-    // begin the game
-}
-```
-
-The `TakeTurn` method will return true if the user's account was successfully debited for the number of tokens required to play, in which case you should begin the turn. If the method returns false, do not perform any action; the plugin will automatically render appropriate UI components informing the user that more tokens are required and offering the option to purchase tokens.
-
-## <a name="testing"></a>Testing Instructions
-
-You can use test mode to try out your integration in a safe environment. Transactions will not by processed by your credit card provider, and you can use the following test CC credentials: #4242424242424242 CVC: 999 Exp: 12/2013.
-
-To enable test mode, in the PocketChangeAndroidControl script, set the ENABLE\_TEST\_MODE constant to true.
-
-Note: when the bank comes up there will be a banner indicating that you're in a test environment. **You must reset the ENABLE\_TEST\_MODE constant to false before releasing your app, otherwise transactions will not go through.**
-
-In addition to test mode, the plugin includes a test scene (Plugins/PocketChangeAndroid/testSupport/PocketChangeAndroidPlayerControlTestScene) that allows you to perform various actions to confirm that you have a sane configuration. When using the test scene, be sure to enable test mode, or you will quickly run out of tokens and be unable to continue testing.
+To configure the plugin, change the APP\_ID constant in the PocketChangeAndroidControl script to match the APP\_ID you obtained in step 1.
 
 ## <a name="upgrading"></a>Upgrading
 
