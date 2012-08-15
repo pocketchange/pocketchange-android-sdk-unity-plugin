@@ -49,7 +49,7 @@ To configure the plugin, change the APP\_ID constant in the PocketChangeAndroidC
 Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the plugin queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
 
 To display the next pending notification, call:
-``C#
+```C#
 PocketChangeAndroid.DisplayReward();
 ```
 
