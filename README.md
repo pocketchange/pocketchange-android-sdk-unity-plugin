@@ -42,9 +42,31 @@ Update your Plugins/Android/AndroidManifest.xml file to declare the components a
 
 ## Step 6: Integrate the plugin with your game
 
-To initialize the plugin and its corresponding visual elements, add the PocketChangeAndroidPlayerInitializer prefab to the first scene in your game; this object persists for the lifetime of your game and automatically invokes SDK components as needed.
+To initialize the plugin, add the PocketChangeAndroidPlayerInitializer prefab to the first scene in your game; this object persists for the lifetime of your game and automatically invokes SDK lifecycle components as needed.
 
-To configure the plugin, change the APP\_ID constant in the PocketChangeAndroidControl script to match the APP\_ID you obtained in step 1.
+To configure the plugin, change the APP\_ID constant in the PocketChangeAndroidConfig script to match the APP\_ID you obtained in step 1.
+
+Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the plugin queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
+
+To display the next pending notification, call:
+``C#
+PocketChangeAndroid.DisplayReward();
+```
+
+Only invoke the `DisplayReward` function after the player has initialized all script instances by calling their `Awake` functions (typically, you should not need any additional logic to enforce this requirement).
+
+
+## <a name="testing"></a>Testing
+
+You can use test mode to validate your integration: The plugin will grant unlimited rewards so that you can confirm your application's behavior after a reward has been granted. To enable test mode:
+
+* In PocketChangeAndroidConfig, set the ENABLE\_TEST\_MODE constant to true.
+* When building your application, check the "Development Build" box in your Android build settings (File » Build Settings » Android).
+
+**You must disable test mode before releasing your app, otherwise users will not receive real rewards.**
+
+The plugin only works properly on real devices. Do not use emulators for testing or you may get faulty test results.
+
 
 ## <a name="upgrading"></a>Upgrading
 
