@@ -55,6 +55,13 @@ PocketChangeAndroid.DisplayReward();
 
 Only invoke the `DisplayReward` function after the player has initialized all script instances by calling their `Awake` functions (typically, you should not need any additional logic to enforce this requirement).
 
+### Add a Button to Open the Pocket Change Shop (Optional)
+
+We encourage developers to add a Pocket Change button which opens our shop. Please use the assets <a href="https://www.dropbox.com/s/aivv76wo7kk4j34/pocket_change_tokens.png">here</a>. When the user clicks the button, call:
+
+```C#
+PocketChangeAndroid.OpenShop();
+```
 
 ## <a name="testing"></a>Testing
 
@@ -66,7 +73,6 @@ You can use test mode to validate your integration: The plugin will grant unlimi
 **You must disable test mode before releasing your app, otherwise users will not receive real rewards.**
 
 The plugin only works properly on real devices. Do not use emulators for testing or you may get faulty test results.
-
 
 ## <a name="upgrading"></a>Upgrading
 
