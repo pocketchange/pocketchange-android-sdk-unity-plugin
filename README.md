@@ -53,7 +53,7 @@ To display the next pending notification, call:
 PocketChangeAndroid.DisplayReward();
 ```
 
-Only invoke the `DisplayReward` function after the player has initialized all script instances by calling their `Awake` functions (typically, you should not need any additional logic to enforce this requirement).
+Only invoke the `DisplayReward` method after the player has initialized all script instances by calling their `Awake` methods (typically, you should not need any additional logic to enforce this requirement).
 
 ### Add a Button to Open the Pocket Change Shop (Optional)
 
@@ -73,6 +73,16 @@ You can use test mode to validate your integration: The plugin will grant unlimi
 **You must disable test mode before releasing your app, otherwise users will not receive real rewards.**
 
 The plugin only works properly on real devices. Do not use emulators for testing or you may get faulty test results.
+
+## <a name="multi-platform-support"></a>Supporting Multiple Platforms
+
+The Pocket Change plugin currently only supports the Android platform. If your Unity project targets multiple platforms, you must ensure that your application does not invoke any PocketChangeAndroid class methods on non-Android platforms, as such invocations will result in runtime errors. To avoid calling Android methods on non-Android platforms, use conditional compilation directives:
+
+```C#
+#if UNITY_ANDROID
+PocketChangeAndroid.Method();
+#endif
+```
 
 ## <a name="upgrading"></a>Upgrading
 
