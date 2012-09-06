@@ -21,7 +21,7 @@ Download the plugin from <https://github.com/pocketchange/pocketchange-android-s
 
 To use the plugin, you must import its corresponding package in Unity: From within your Unity project, select Assets Â» Import Package Â» Custom Package and pick the location of the package you downloaded in step 2.
 
-<img src="http://dl.dropbox.com/u/68268326/unity-plugin-doc-images/import_package.png" alt="Import Package" width="476" height="384" />
+<img src="https://dl.dropbox.com/u/68268326/unity-plugin-doc-images/import_package.png" alt="Import Package" width="476" height="384" />
 
 ## Step 4: Create an AndroidManifest.xml
 
@@ -68,7 +68,7 @@ PocketChangeAndroid.OpenShop();
 You can use test mode to validate your integration: The plugin will grant unlimited rewards so that you can confirm your application's behavior after a reward has been granted. To enable test mode:
 
 * In PocketChangeAndroidConfig, set the ENABLE\_TEST\_MODE constant to true.
-* When building your application, check the "Development Build" box in your Android build settings (File » Build Settings » Android).
+* When building your application, check the "Development Build" box in your Android build settings (File ï¿½ Build Settings ï¿½ Android).
 
 **You must disable test mode before releasing your app, otherwise users will not receive real rewards.**
 
