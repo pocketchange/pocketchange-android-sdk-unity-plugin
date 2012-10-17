@@ -38,7 +38,7 @@ For additional information on Android manifest files, see <http://developer.andr
 
 ## Step 5: Modify your AndroidManifest.xml
 
-Update your Plugins/Android/AndroidManifest.xml file to declare the components and permissions required by the SDK plugin. For instructions on modifying your manifest, see the <a href="http://github.com/pocketchange/pocketchange-android-sdk#readme-android-manifest-modifications">SDK documentation</a>.
+Update your Plugins/Android/AndroidManifest.xml file to declare the components and permissions required by the SDK plugin. For instructions on modifying your manifest, see the <a href="https://github.com/pocketchange/pocketchange-android-sdk/blob/master/README-AndroidManifest.md" target="_blank">SDK documentation</a>.
 
 ## Step 6: Integrate the plugin with your game
 
