@@ -61,7 +61,7 @@ Only invoke the `DisplayNotification` method after the player has initialized al
 You can use test mode to validate your integration: The plugin will grant unlimited rewards so that you can confirm your application's behavior after a reward has been granted. To enable test mode:
 
 * In PocketChangeAndroidConfig, set the ENABLE\_TEST\_MODE constant to true.
-* When building your application, check the "Development Build" box in your Android build settings (File � Build Settings � Android).
+* When building your application, check the "Development Build" box in your Android build settings (File &#187; Build Settings &#187; Android).
 
 **You must disable test mode before releasing your app, otherwise users will not receive real rewards.**
 
