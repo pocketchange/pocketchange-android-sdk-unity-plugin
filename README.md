@@ -50,18 +50,11 @@ Visual notifications may accompany certain rewards. In order to avoid interferin
 
 To display the next pending notification, call:
 ```C#
-PocketChangeAndroid.DisplayReward();
+PocketChangeAndroid.DisplayNotification();
 ```
 
-Only invoke the `DisplayReward` method after the player has initialized all script instances by calling their `Awake` methods (typically, you should not need any additional logic to enforce this requirement).
+Only invoke the `DisplayNotification` method after the player has initialized all script instances by calling their `Awake` methods (typically, you should not need any additional logic to enforce this requirement).
 
-### Add a Button to Open the Pocket Change Shop (Optional)
-
-We encourage developers to add a Pocket Change button which opens our shop. Please use the assets <a href="https://www.dropbox.com/s/aivv76wo7kk4j34/pocket_change_tokens.png">here</a>. When the user clicks the button, call:
-
-```C#
-PocketChangeAndroid.OpenShop();
-```
 
 ## <a name="testing"></a>Testing
 
