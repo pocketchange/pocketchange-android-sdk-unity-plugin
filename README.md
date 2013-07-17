@@ -55,6 +55,23 @@ PocketChangeAndroid.DisplayNotification();
 
 Only invoke the `DisplayNotification` method after the player has initialized all script instances by calling their `Awake` methods (typically, you should not need any additional logic to enforce this requirement).
 
+## Step 7: Add Event-Based Rewards
+In order to include your events in the reward system, you must provide your sales representative with a listing of the events you want to offer.
+
+In order to make the SDK respond to your event-based rewards you must trigger the reward in your code as soon as the "event" occurs. You use the following method to specify that the identified reward should be granted to the user. <b>Until your application goes live with events this code will not fire off an event if the application isn't in test mode.</b>
+
+        void grantReward(String referenceID, int amount)
+
+This method informs the SDK that an event with the specified reference ID has been completed by the user a certain number of times. Generally the "amount" will be 1 unless they've incured more then one event reward with the same reference ID.
+
+Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the SDK queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
+
+Please ensure the call to PocketChangeAndroid.DisplayNotification() does not immediately follow the call to grantReward() or initalize(), these functions require a small delay in which to validate the rewards with our servers before the application can display them.
+
+Next ensure that you are displaying the queued notifications at a spot that makes sense for you app (i.e. in a level-based game at the end of each level displaying pending rewards makes sense). After invoking initialize, call the `PocketChangeAndroid.DisplayNotification()` method to display any rewards accumulated since the last call to this method. The following code launches the next pending notification.
+
+      PocketChangeAndroid.DisplayNotification()
+
 
 ## <a name="testing"></a>Testing
 
