@@ -9,9 +9,9 @@ Prerequisites:
 
 **Note that version 17 of the Android SDK was released in 03/2012; if you experience build errors, please ensure that you have an appropriate version.**
 
-## Step 1: Obtain an id for your game
+## Step 1: Obtain an API Key
 
-In order to integrate the Pocket Change Android SDK plugin, you must first obtain an APP\_ID from your account manager. Each game will have a separate APP\_ID.
+In order to integrate the Pocket Change Android SDK plugin, you must first obtain an API key (formerly referred to as an "App ID") from your account manager. Each game will have a separate key.
 
 ## Step 2: Download the Plugin
 
@@ -44,7 +44,7 @@ Update your Plugins/Android/AndroidManifest.xml file to declare the components a
 
 To initialize the plugin, add the PocketChangeAndroidPlayerInitializer prefab to the first scene in your game; this object persists for the lifetime of your game and automatically invokes SDK lifecycle components as needed.
 
-To configure the plugin, change the APP\_ID constant in the PocketChangeAndroidConfig script to match the APP\_ID you obtained in step 1.
+To configure the plugin, change the API\_KEY constant in the PocketChangeAndroidConfig script to match the API key you obtained in step 1.
 
 Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the plugin queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
 
@@ -56,22 +56,24 @@ PocketChangeAndroid.DisplayNotification();
 Only invoke the `DisplayNotification` method after the player has initialized all script instances by calling their `Awake` methods (typically, you should not need any additional logic to enforce this requirement).
 
 ## Step 7: Add Event-Based Rewards
-In order to include your events in the reward system, you must provide your sales representative with a listing of the events you want to offer.
 
-In order to make the SDK respond to your event-based rewards you must trigger the reward in your code as soon as the "event" occurs. You use the following method to specify that the identified reward should be granted to the user. <b>Until your application goes live with events this code will not fire off an event if the application isn't in test mode.</b>
+In order to reward users based on events specific to your application, you must provide your sales representative with a listing of events. Once your representative has configured the events, you can start testing the related functionality in your application.
 
-        void grantReward(String referenceID, int amount)
+As soon as an event occurs, invoke the following method:
+```C#
+PocketChangeAndroid.GrantReward(String referenceID, int amount)
+```
 
-This method informs the SDK that an event with the specified reference ID has been completed by the user a certain number of times. Generally the "amount" will be 1 unless they've incured more then one event reward with the same reference ID.
+This method informs the SDK that the event with the provided `referenceID` occurred `amount` times. Typically, `amount` should be 1; a value greater than 1 indicates multiple occurrences of the event. **Until your application goes live with events, this method will only have an effect in test mode.**
 
 Visual notifications may accompany certain rewards. In order to avoid interfering with your application, the SDK queues these notifications so that you can deliver them at convenient times. Your application must periodically display these notifications, or users will be unaware of their rewards.
 
-Please ensure the call to PocketChangeAndroid.DisplayNotification() does not immediately follow the call to grantReward() or initalize(), these functions require a small delay in which to validate the rewards with our servers before the application can display them.
+Please ensure the call to `PocketChangeAndroid.DisplayNotification` does not immediately follow the call to `GrantReward`, these functions require a small delay in which to validate the rewards with our servers before the application can display them.
 
-Next ensure that you are displaying the queued notifications at a spot that makes sense for you app (i.e. in a level-based game at the end of each level displaying pending rewards makes sense). After invoking initialize, call the `PocketChangeAndroid.DisplayNotification()` method to display any rewards accumulated since the last call to this method. The following code launches the next pending notification.
-
-      PocketChangeAndroid.DisplayNotification()
-
+Next ensure that you are displaying the queued notifications at a spot that makes sense for you app (i.e. in a level-based game at the end of each level displaying pending rewards makes sense). After invoking initialize, call the `PocketChangeAndroid.DisplayNotification` method to display any rewards accumulated since the last call to this method. The following code launches the next pending notification.
+```C#
+PocketChangeAndroid.DisplayNotification()
+```
 
 ## <a name="testing"></a>Testing
 
@@ -79,6 +81,7 @@ You can use test mode to validate your integration: The plugin will grant unlimi
 
 * In PocketChangeAndroidConfig, set the ENABLE\_TEST\_MODE constant to true.
 * When building your application, check the "Development Build" box in your Android build settings (File &#187; Build Settings &#187; Android).
+* Each time you switch between production and test modes, uninstall the application.
 
 **You must disable test mode before releasing your app, otherwise users will not receive real rewards.**
 
